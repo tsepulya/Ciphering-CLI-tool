@@ -1,4 +1,4 @@
-module.exports.cipherInRot = (phrase, type) => {
+export const cipherInRot = (phrase, type) => {
     let arrayNew = [];
     for (let i = 0; i < phrase.length; i++) {
         let pos = phrase.codePointAt(i);

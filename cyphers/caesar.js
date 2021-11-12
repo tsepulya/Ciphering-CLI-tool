@@ -1,4 +1,4 @@
-module.exports.cipherInCaesar = (phrase, type) => {
+export const cipherInCaesar = (phrase, type) => {
     let arrayNew = [];
     for (let i = 0; i < phrase.length; i++) {
         let pos = phrase.codePointAt(i);

@@ -1,4 +1,4 @@
-module.exports.cipherInAtbash = (phrase) => {
+export const cipherInAtbash = (phrase) => {
     let arrayNew = [];
     for (let i = 0; i < phrase.length; i++) {
         let pos = phrase.codePointAt(i);
