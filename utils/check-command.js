@@ -15,11 +15,7 @@ export const checkCommand = (command) => {
         process.stderr.write('incorrect config - not full data');
     } else if (command.length === 6) {
         if (command[4] === '-i' || command[4] === '--input') {
-            if (!fs.existsSync(command[5])) {
-                process.stderr.write('input file doesn`t exist');
-            } else {
                 cipherFromFileToConsole();
-            }
         } else if (command[4] === '-o' || command[4] === '--output') {
             cipherFromConsoleToFile();
         } else {
@@ -29,17 +25,9 @@ export const checkCommand = (command) => {
         cipherInConsole();
     } else if (command.length === 8) {
         if ((command[4] === '-i' || command[4] === '--input') && command[6] === '-o' || command[6] === '--output' ) {
-            if (!fs.existsSync(getInput(process.argv))) {
-                process.stderr.write('input file doesn`t exist');
-            } else {
                 cipherInFiles();
-            }
         } else if ((command[4] === '-o' || command[4] === '--output') && (command[6] === '-i' || command[6] === '--input')) {
-            if (!fs.existsSync(getInput(process.argv))) {
-                process.stderr.write('input file doesn`t exist');
-            } else {
                 cipherInFiles();
-            }
         } else {
             process.stderr.write('you have mistake in input or output config');
         }
