@@ -10,5 +10,3 @@ export const cipherText = (arr, phrase) => {
     }
     return res;
 }
-
-cipherText(['C1','C1','R0','A'], 'Anna');

@@ -1,5 +1,7 @@
 import fs from 'fs';
-import { checkCypherConfig } from "../cyphers/get-array-from-args.js"
+import { checkCypherConfig } from '../cyphers/get-array-from-args.js';
+import { cipherInConsole, cipherFromFileToConsole, cipherFromConsoleToFile, cipherInFiles } from '../streams/pipeline.js';
+import { getInput } from './get-input.js';
 
 export const checkCommand = (command) => {
     if (command[2] !== '-c' && command[2] !== '--config') {
@@ -13,33 +15,30 @@ export const checkCommand = (command) => {
         process.stderr.write('incorrect config - not full data');
     } else if (command.length === 6) {
         if (command[4] === '-i' || command[4] === '--input') {
-            files.input = command[5];
             if (!fs.existsSync(command[5])) {
                 process.stderr.write('input file doesn`t exist');
             } else {
-                process.stdout.write('запуск функции 2 (из файла в консоль)'); ////////// запуск функции 2 (из файла в консоль)
+                cipherFromFileToConsole();
             }
         } else if (command[4] === '-o' || command[4] === '--output') {
-            files.output = command[5]; ////////////// сделать проверку на правильность пути файла
-            process.stdout.write(' запуск функции 3 (из консоли в файл)'); ////////// запуск функции 3 (из консоли в файл)
+            cipherFromConsoleToFile();
         } else {
             process.stderr.write('you should use -i or -o in command');
         }
     } else if (command.length === 4) {
-        process.stdout.write(' запуск функции 1 (из консоли в консоль)'); ///// запуск функции 1 (из консоли в консоль)
+        cipherInConsole();
     } else if (command.length === 8) {
         if ((command[4] === '-i' || command[4] === '--input') && command[6] === '-o' || command[6] === '--output' ) {
-            if (!fs.existsSync(command[5])) {
+            if (!fs.existsSync(getInput(process.argv))) {
                 process.stderr.write('input file doesn`t exist');
             } else {
-                process.stdout.write('запуск функции 4 (из файла в файл)'); ////////// запуск функции 4 (из файла в файл)
+                cipherInFiles();
             }
         } else if ((command[4] === '-o' || command[4] === '--output') && (command[6] === '-i' || command[6] === '--input')) {
-            files.input = command[6];
-            if (!fs.existsSync(command[6])) {
+            if (!fs.existsSync(getInput(process.argv))) {
                 process.stderr.write('input file doesn`t exist');
             } else {
-                process.stdout.write('запуск функции 4 (из файла в файл)'); ////////// запуск функции 4 (из файла в файл)
+                cipherInFiles();
             }
         } else {
             process.stderr.write('you have mistake in input or output config');

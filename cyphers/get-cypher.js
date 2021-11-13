@@ -18,5 +18,3 @@ export const getCypher = (cypher, phrase) => {
             console.log('Mistake in cypher');
       }
 }
-
-console.log(getCypher('C1', 'Anna'));
