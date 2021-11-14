@@ -24,5 +24,5 @@ export const getInput = (array) => {
         } else {
             new HumanFriendlyErr('if you use "--input" - write the name of file').write();
         }
-    }
+    } 
 }
