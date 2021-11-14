@@ -8,25 +8,21 @@ export const getInput = (array) => {
         if (array[ind + 1]) {
             if (!fs.existsSync(array[ind + 1])) {
                 new HumanFriendlyErr('input file doesn`t exist').write();
-                return './default-input.txt';
             } else {
                 return array[ind + 1];
             } 
         } else {
-            return './default-input.txt';
+            new HumanFriendlyErr('if you use "-i" - write the name of file').write();
         }
     } else if (indInput !== -1) {
         if (array[indInput + 1]) {
             if (!fs.existsSync(array[indInput + 1])) {
                 new HumanFriendlyErr('input file doesn`t exist').write();
-                return './default-input.txt';
             } else {
                 return array[indInput + 1];
             } 
         } else {
-            return './default-input.txt';
+            new HumanFriendlyErr('if you use "--input" - write the name of file').write();
         }
-    } else {
-        return './default-input.txt';
     }
 }

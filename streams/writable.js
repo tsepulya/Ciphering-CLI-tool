@@ -4,10 +4,6 @@ import { getOutput } from '../utils/get-output.js';
 
 export const writeInConsole = process.stdout;
 
-// const output = getOutput(process.argv);
-
-// export const writeInFile = fs.createWriteStream(output, { flags: 'a' });
-
 class WriteStream extends Writable {
   constructor() {
     super();
@@ -15,10 +11,9 @@ class WriteStream extends Writable {
   _write(chunk, encoding, callback) {
       try {
         const output = getOutput(process.argv);
-        fs.writeFile(output, chunk.toString(), { flag: 'a' }, err => err);
+        fs.writeFile(output.trim(), chunk.toString(), { flag: 'a' }, err => err);
         callback();
-      }
-      catch (err) {
+      } catch (err) {
           console.log('err in writable', err);
       }
   }
