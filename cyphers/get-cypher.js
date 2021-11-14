@@ -20,8 +20,6 @@ export const getCypher = (cypher, phrase) => {
       }
 }
 
-// console.log(getCypher('R', 'Anna')); ///////////////////////// delete
-
 export const findCypherInArgs = (array) => {
     let c = array.findIndex(elem => elem === '-c');
     let config = array.findIndex(elem => elem === '--config');

@@ -22,5 +22,7 @@ export const checkCommand = (command) => {
         if ((i !== -1 || input !== -1) && (o !== -1 || output !== -1)) {
             cipherInFiles();
         }
+    } else {
+        new HumanFriendlyErr('you have mistake in your config').write();
     }
 }

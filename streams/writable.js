@@ -1,8 +1,27 @@
 import fs from 'fs';
+import { Writable } from 'stream';
 import { getOutput } from '../utils/get-output.js';
 
 export const writeInConsole = process.stdout;
 
-const output = getOutput(process.argv);
+// const output = getOutput(process.argv);
 
-export const writeInFile = fs.createWriteStream(output, { flags: 'a' });
+// export const writeInFile = fs.createWriteStream(output, { flags: 'a' });
+
+class WriteStream extends Writable {
+  constructor() {
+    super();
+  }
+  _write(chunk, encoding, callback) {
+      try {
+        const output = getOutput(process.argv);
+        fs.writeFile(output, chunk.toString(), { flag: 'a' }, err => err);
+        callback();
+      }
+      catch (err) {
+          console.log('err in writable', err);
+      }
+  }
+}
+
+export const writeInFile = new WriteStream();

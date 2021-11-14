@@ -8,8 +8,6 @@ const configCypher = getArrayFromArgs(findCypherInArgs(process.argv));
 class CounterTransform extends Transform {
     _transform(chunk, encoding, callback) {
       try {
-        // const resultString = chunk.toString().toUpperCase();
-        // const resultString = caesar.cipherInCaesar(chunk.toString(), 1);
         const resultString = cipherText(configCypher, chunk.toString());
 
         callback(null, resultString);

@@ -10,27 +10,22 @@ export const getOutput = (array) => {
             const dir = path.dirname(array[ind + 1]);
             if (!fs.existsSync(dir)) {
                 new HumanFriendlyErr('output directory doesn`t exist').write();
-                return './default-output.txt';
-            }
-            else {
+            } else {
                 return array[ind + 1];
             }
         } else {
-            return './default-output.txt';
+            new HumanFriendlyErr('if you use "-o" - write the name of file').write();
         }
     } else if (indOutput !== -1) { 
         if (array[indOutput + 1]) {
             const dir = path.dirname(array[indOutput + 1]);
             if (!fs.existsSync(dir)) {
                 new HumanFriendlyErr('output directory doesn`t exist').write();
-                return './default-output.txt';
             } else {
                 return array[indOutput + 1];
             }
         } else {
-            return './default-output.txt';
+            new HumanFriendlyErr('if you use "--output" - write the name of file').write();
         }
-    } else {
-        return './default-output.txt';
     }
 }
