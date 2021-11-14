@@ -20,7 +20,7 @@ class ReadStream extends Readable {
                 }
             });
         } catch (err) {
-            console.log('err in readable');
+            process.stderr.write('err in readable');
         }
     }
 }

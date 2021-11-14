@@ -14,7 +14,7 @@ class WriteStream extends Writable {
         fs.writeFile(output.trim(), chunk.toString(), { flag: 'a' }, err => err);
         callback();
       } catch (err) {
-          console.log('err in writable', err);
+        process.stderr.write('err in writable');
       }
   }
 }
