@@ -16,8 +16,8 @@ Implementation of CLI tool that will encode and decode a text by 3 substitution 
 4. Enter the command, using instruction below
 
 # Command instruction
-1. Command should start with 'node my_ciphering_cli -c' or 'node my_ciphering_cli --config'
-2. config for ciphers Config is a string with pattern {XY(-)}n, where:
+1. Command should start with 'node my_ciphering_cli' or 'node my_ciphering_cli'
+2. -c, --config - config for ciphers Config is a string with pattern {XY(-)}n, where:
     * X is a cipher mark:
         - C is for Caesar cipher (with shift 1)
         - A is for Atbash cipher

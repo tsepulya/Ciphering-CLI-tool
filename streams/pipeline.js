@@ -2,6 +2,7 @@ import { pipeline } from 'stream';
 import { writeInConsole, writeInFile } from './writable.js';
 import { readfromConsole, readFromFile } from './readable.js';
 import { counterTransform } from './transform.js';
+import { HumanFriendlyErr } from '../utils/handle-errors.js';
 
 export const cipherInConsole = () => {
     pipeline(
@@ -10,7 +11,7 @@ export const cipherInConsole = () => {
         writeInConsole,
         (err) => {
             if (err) {
-                process.stderr.write('Pipeline failed.', err);
+                new HumanFriendlyErr('Pipeline failed').write();
             }
         }
     );
@@ -23,7 +24,7 @@ export const cipherFromFileToConsole = () => {
         writeInConsole,
         (err) => {
             if (err) {
-                process.stderr.write('Pipeline failed.', err);
+                new HumanFriendlyErr('Pipeline failed').write();
             }
         }
     );
@@ -36,7 +37,7 @@ export const cipherFromConsoleToFile = () => {
         writeInFile,
         (err) => {
             if (err) {
-                process.stderr.write('Pipeline failed.', err);
+                new HumanFriendlyErr('Pipeline failed').write();
             }
         }
     );
@@ -49,7 +50,7 @@ export const cipherInFiles = () => {
         writeInFile,
         (err) => {
             if (err) {
-                process.stderr.write('Pipeline failed.', err);
+                new HumanFriendlyErr('Pipeline failed').write();
             }
         }
     )

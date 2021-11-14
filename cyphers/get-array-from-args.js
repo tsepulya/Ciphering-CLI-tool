@@ -1,4 +1,5 @@
-import { exit } from 'process';
+// import { exit } from 'process';
+import { HumanFriendlyErr } from "../utils/handle-errors.js";
 
 const cypherConfigArray = ['C1', 'C0', 'R1', 'R0', 'A'];
 
@@ -14,8 +15,7 @@ export const checkCypherConfig = (cipher) => {
     cipherArray.forEach(elem => {
         if (!cypherConfigArray.find(elCorrect => elCorrect === elem)) {
             res = false;
-            process.stderr.write(`This config - ${elem} is not correct`);
-            process.exit();
+            new HumanFriendlyErr(`This config - ${elem} is not correct`).write();
         } else {
             res = true;
         }

@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { HumanFriendlyErr } from './handle-errors.js';
 
 export const getOutput = (array) => {
     let ind = array.findIndex(elem => elem === '-o');
@@ -8,7 +9,7 @@ export const getOutput = (array) => {
         if (array[ind + 1]) {
             const dir = path.dirname(array[ind + 1]);
             if (!fs.existsSync(dir)) {
-                process.stderr.write('output directory doesn`t exist');
+                new HumanFriendlyErr('output directory doesn`t exist').write();
                 return './default-output.txt';
             }
             else {
@@ -21,7 +22,7 @@ export const getOutput = (array) => {
         if (array[indOutput + 1]) {
             const dir = path.dirname(array[indOutput + 1]);
             if (!fs.existsSync(dir)) {
-                process.stderr.write('output directory doesn`t exist');
+                new HumanFriendlyErr('output directory doesn`t exist').write();
                 return './default-output.txt';
             } else {
                 return array[indOutput + 1];

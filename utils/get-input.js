@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { HumanFriendlyErr } from './handle-errors.js';
 
 export const getInput = (array) => {
     let ind = array.findIndex(elem => elem === '-i');
@@ -6,7 +7,7 @@ export const getInput = (array) => {
     if (ind !== -1) {
         if (array[ind + 1]) {
             if (!fs.existsSync(array[ind + 1])) {
-                process.stderr.write('input file doesn`t exist');
+                new HumanFriendlyErr('input file doesn`t exist').write();
                 return './default-input.txt';
             } else {
                 return array[ind + 1];
@@ -17,7 +18,7 @@ export const getInput = (array) => {
     } else if (indInput !== -1) {
         if (array[indInput + 1]) {
             if (!fs.existsSync(array[indInput + 1])) {
-                process.stderr.write('input file doesn`t exist');
+                new HumanFriendlyErr('input file doesn`t exist').write();
                 return './default-input.txt';
             } else {
                 return array[indInput + 1];
