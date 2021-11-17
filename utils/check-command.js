@@ -10,7 +10,7 @@ export const checkCommand = (processArgs) => {
     let o = command.findIndex(elem => elem === '-o');
     if (c !== -1 && !checkCypherConfig(command[c + 1])) {
     } else if (!checkDoubles(command)) {
-        new HumanFriendlyErr('you have doubled arguments in config').write();
+       throw new HumanFriendlyErr('you have doubled arguments in config')
     } else if (command.length > 8) {
         new HumanFriendlyErr('you have unnecessary text in command').write();
     } else if (command.length % 2 !== 0) {

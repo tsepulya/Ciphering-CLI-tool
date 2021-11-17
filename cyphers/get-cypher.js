@@ -16,7 +16,7 @@ export const getCypher = (cypher, phrase) => {
         case 'A':
             return cipherInAtbash(phrase);
         default:
-            new HumanFriendlyErr('Mistake in cypher').write();
+            throw new HumanFriendlyErr('Mistake in cypher');
       }
 }
 

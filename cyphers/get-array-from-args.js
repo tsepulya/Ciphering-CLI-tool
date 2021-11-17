@@ -14,7 +14,7 @@ export const checkCypherConfig = (cipher) => {
     cipherArray.forEach(elem => {
         if (!cypherConfigArray.find(elCorrect => elCorrect === elem)) {
             res = false;
-            new HumanFriendlyErr(`This config - ${elem} is not correct`).write();
+            throw new HumanFriendlyErr(`This config - ${elem} is not correct`)
         } else {
             res = true;
         }
