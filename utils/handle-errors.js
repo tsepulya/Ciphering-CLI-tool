@@ -4,6 +4,6 @@ export class HumanFriendlyErr extends Error {
     }
     write() {
       process.stderr.write(this.message);
-      process.exit();
+      // process.exit();
     }
 }
