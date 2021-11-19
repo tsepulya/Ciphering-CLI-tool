@@ -27,15 +27,15 @@ export const findCypherInArgs = (array) => {
         if (array[c + 1]) {
             return array[c + 1];
         } else {
-            new HumanFriendlyErr('config for ciphers Config should be {XY(-)}n').write();
+            throw new HumanFriendlyErr('config for ciphers Config should be {XY(-)}n');
         }
     } else if (config !== -1) {
         if (array[config + 1]) {
             return array[config + 1];
         } else {
-            new HumanFriendlyErr('config for ciphers Config should be {XY(-)}n').write();
+            throw new HumanFriendlyErr('config for ciphers Config should be {XY(-)}n');
         }
     } else {
-        new HumanFriendlyErr(`There is no config for ciphers Config`).write();
+        throw new HumanFriendlyErr(`There is no config for ciphers Config`);
     }
 }

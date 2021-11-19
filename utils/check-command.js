@@ -8,11 +8,11 @@ export const checkCommand = (processArgs) => {
     let c = command.findIndex(elem => elem === '-c');
     let i = command.findIndex(elem => elem === '-i');
     let o = command.findIndex(elem => elem === '-o');
-    if (c !== -1 && !checkCypherConfig(command[c + 1])) {
+    if (command.length > 8) {
+        throw new HumanFriendlyErr('you have unnecessary text in command');
     } else if (!checkDoubles(command)) {
-       throw new HumanFriendlyErr('you have doubled arguments in config')
-    } else if (command.length > 8) {
-        new HumanFriendlyErr('you have unnecessary text in command').write();
+        throw new HumanFriendlyErr('you have doubled arguments in config');
+    } else if (c !== -1 && !checkCypherConfig(command[c + 1])) {
     } else if (command.length % 2 !== 0) {
         new HumanFriendlyErr('you have absent arguments in your command').write();
     } else if (command.length === 6 && i === -1 && o === -1) {

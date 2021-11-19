@@ -16,4 +16,4 @@ export const changeConfig = (array) => {
 export const checkDoubles = (array) => {
     let set = new Set(array);
     return set.size === array.length;
-  }
+}

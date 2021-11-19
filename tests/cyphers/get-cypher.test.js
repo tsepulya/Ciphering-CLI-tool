@@ -9,21 +9,23 @@ test('getCypher should return phrase with cipher', () => {
     expect(() => getCypher('A1', 'This is secret. Message about "_" symbol!')).toThrow()
 })
 
-// describe('findCypherInArgs', () => {
+describe('findCypherInArgs', () => {
 
-//     let processArguments;
+    let processArguments;
 
-//     beforeEach(() => {
-//         processArguments = ['node', 'my_ciphering_cli', '-c', 'C1-C1-R0-A', '-i', './input.txt', '-o', './output.txt']
-//     })
+    beforeEach(() => {
+        processArguments = ['node', 'my_ciphering_cli', '-c', 'C1-C1-R0-A', '-i', './input.txt', '-o', './output.txt']
+    })
 
-//     test('findCypherInArgs should return cypher config', () => {
-//         expect(findCypherInArgs(processArguments)).toBe('C1-C1-R0-A')
-//         expect(findCypherInArgs(processArguments.splice(2, 1, '--config'))).toBe('C1-C1-R0-A')
-//     })
+    test('findCypherInArgs should return cypher config', () => {
+        expect(findCypherInArgs(processArguments)).toBe('C1-C1-R0-A')
+        processArguments.splice(2, 1, '--config');
+        expect(findCypherInArgs(processArguments)).toBe('C1-C1-R0-A')
+    })
 
-//     // test('findCypherInArgs should throw error', () => {
-//     //     expect(findCypherInArgs(processArguments.splice(3))).toThrow()
-//     // })
-// })
+    test('findCypherInArgs should throw error with empty config arg', () => {
+        processArguments.splice(2, 1);
+        expect(() => findCypherInArgs(processArguments)).toThrow()
+    })
+})
 

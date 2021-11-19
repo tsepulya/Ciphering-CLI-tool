@@ -1,9 +1,15 @@
+// export class HumanFriendlyErr extends Error {
+//     constructor(message) {
+//       super(message);
+//     }
+//     write() {
+//       process.stderr.write(this.message);
+//       // process.exit();
+//     }
+// }
+
 export class HumanFriendlyErr extends Error {
-    constructor(message) {
-      super(message);
-    }
-    write() {
-      process.stderr.write(this.message);
-      // process.exit();
-    }
+  constructor(message) {
+    super(message);
+  }
 }
