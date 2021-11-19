@@ -23,9 +23,19 @@ describe('findCypherInArgs', () => {
         expect(findCypherInArgs(processArguments)).toBe('C1-C1-R0-A')
     })
 
+    test('findCypherInArgs should throw error with empty config', () => {
+        processArguments.splice(3, 5);
+        expect(() => findCypherInArgs(processArguments)).toThrow(`config for ciphers Config should be {XY(-)}n`)
+    })
+
+    test('findCypherInArgs should throw error with empty config', () => {
+        processArguments.splice(2, 6, '--config');
+        expect(() => findCypherInArgs(processArguments)).toThrow(`config for ciphers Config should be {XY(-)}n`)
+    })
+
     test('findCypherInArgs should throw error with empty config arg', () => {
         processArguments.splice(2, 1);
-        expect(() => findCypherInArgs(processArguments)).toThrow()
+        expect(() => findCypherInArgs(processArguments)).toThrow(`There is no config for ciphers Config`)
     })
 })
 
