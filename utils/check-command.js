@@ -14,9 +14,9 @@ export const checkCommand = (processArgs) => {
         throw new HumanFriendlyErr('you have doubled arguments in config');
     } else if (c !== -1 && !checkCypherConfig(command[c + 1])) {
     } else if (command.length % 2 !== 0) {
-        new HumanFriendlyErr('you have absent arguments in your command').write();
+        throw new HumanFriendlyErr('you have absent arguments in your command');
     } else if (command.length === 6 && i === -1 && o === -1) {
-        new HumanFriendlyErr('you have absent arguments in your command (-i or -o)').write();
+        throw new HumanFriendlyErr('you have absent arguments in your command (-i or -o)');
     } else if (i === -1 && o === -1 ) {
         cipherInConsole();
     } else if (i !== -1 && o === -1) {
@@ -28,6 +28,6 @@ export const checkCommand = (processArgs) => {
             cipherInFiles();
         }
     } else {
-        new HumanFriendlyErr('you have mistake in your config').write();
+        throw new HumanFriendlyErr('you have mistake in your config');
     }
 }
