@@ -1,22 +1,28 @@
 import { checkCommand } from "../../utils/check-command.js";
 import {jest} from '@jest/globals';
-import { cipherInFiles, cipherInConsole, cipherFromFileToConsole, cipherFromConsoleToFile } from "../../streams/pipeline.js";
 
-const mockCipherInFiles = jest.fn(() => {
-    cipherInFiles();
-})
+const cipherInConsole = jest.fn();
+const cipherFromFileToConsole = jest.fn();
+const cipherFromConsoleToFile = jest.fn();
+const cipherInFiles = jest.fn();
 
-const mockCipherInConsole = jest.fn(() => {
-    cipherInConsole();
-})
-
-const mockCipherFromFileToConsole = jest.fn(() => {
-    cipherFromFileToConsole();
-})
-
-const mockCipherFromConsoleToFile = jest.fn(() => {
-    cipherFromConsoleToFile();
-})
+const MockCheckCommand = jest.fn();
+MockCheckCommand.mockImplementation((args) => {
+    checkCommand(args);
+    let i = args.findIndex(elem => elem === '-i');
+    let o = args.findIndex(elem => elem === '-o');
+    if (i === -1 && o === -1 ) {
+        cipherInConsole();
+    } else if (i !== -1 && o === -1) {
+        cipherFromFileToConsole();
+    } else if (i === -1 && o !== -1) {
+        cipherFromConsoleToFile();
+    } else if (args.length === 8) {
+        if (i !== -1 && o !== -1) {
+            cipherInFiles();
+        }
+    }
+});
 
 describe('checkCommand', () => {
 
@@ -33,7 +39,7 @@ describe('checkCommand', () => {
 
     test('check doubled args', () => {
         processArguments.splice(6, 1, '-i');
-        expect(() => checkCommand(processArguments)).toThrow('you have doubled arguments in config');
+        expect(() => checkCommand(processArguments)).toThrow('You provided -i argument more than once');
     })
 
     test('check if some configs are absent', () => {
@@ -46,32 +52,26 @@ describe('checkCommand', () => {
     })
 
     test('check if cipherInFiles works', () => {
-        checkCommand(processArguments);
-        mockCipherInFiles();
-        expect(mockCipherInFiles).toHaveBeenCalled();
+        MockCheckCommand(processArguments);
+        expect(cipherInFiles).toHaveBeenCalled();
     })
 
     test('check if cipherInConsole works', () => {
         processArguments.splice(4, 4);
-        checkCommand(processArguments);
-        mockCipherInConsole();
-        expect(mockCipherInConsole).toHaveBeenCalled();
+        MockCheckCommand(processArguments);
+        expect(cipherInConsole).toHaveBeenCalled();
     })
 
     test('check if cipherFromFileToConsole works', () => {
         processArguments.splice(6, 2);
-        checkCommand(processArguments);
-        mockCipherFromConsoleToFile();
-        expect(mockCipherFromConsoleToFile).toHaveBeenCalled();
+        MockCheckCommand(processArguments);
+        expect(cipherFromFileToConsole).toHaveBeenCalled();
     })
 
     test('check if cipherFromConsoleToFile works', () => {
         processArguments.splice(4, 2);
-        checkCommand(processArguments);
-        mockCipherFromFileToConsole();
-        expect(mockCipherFromFileToConsole).toHaveBeenCalled();
+        MockCheckCommand(processArguments);
+        expect(cipherFromConsoleToFile).toHaveBeenCalled();
     })
 
 })
-
-// npm run test:coverage

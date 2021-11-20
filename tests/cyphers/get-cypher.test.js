@@ -6,7 +6,7 @@ test('getCypher should return phrase with cipher', () => {
     expect(getCypher('R1', 'This is secret. Message about "_" symbol!')).toBe('Bpqa qa amkzmb. Umaaiom ijwcb "_" agujwt!')
     expect(getCypher('R0', 'This is secret. Message about "_" symbol!')).toBe('Lzak ak kwujwl. Ewkksyw stgml "_" kqetgd!')
     expect(getCypher('A', 'This is secret. Message about "_" symbol!')).toBe('Gsrh rh hvxivg. Nvhhztv zylfg "_" hbnylo!')
-    expect(() => getCypher('A1', 'This is secret. Message about "_" symbol!')).toThrow()
+    expect(() => getCypher('A1', 'This is secret. Message about "_" symbol!')).toThrow('Mistake in cypher')
 })
 
 describe('findCypherInArgs', () => {

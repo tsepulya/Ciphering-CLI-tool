@@ -1,7 +1,7 @@
 import { checkCypherConfig } from '../cyphers/get-array-from-args.js';
 import { cipherInConsole, cipherFromFileToConsole, cipherFromConsoleToFile, cipherInFiles } from '../streams/pipeline.js';
 import { HumanFriendlyErr } from './handle-errors.js';
-import { changeConfig, checkDoubles } from './change-config.js';
+import { changeConfig, checkDoubles, findDoubles } from './change-config.js';
 
 export const checkCommand = (processArgs) => {
     let command = changeConfig(processArgs);
@@ -11,7 +11,10 @@ export const checkCommand = (processArgs) => {
     if (command.length > 8) {
         throw new HumanFriendlyErr('you have unnecessary text in command');
     } else if (!checkDoubles(command)) {
-        throw new HumanFriendlyErr('you have doubled arguments in config');
+        const doubles = findDoubles(command);
+        doubles.forEach(elem => {
+            throw new HumanFriendlyErr(`You provided ${elem} argument more than once`);
+        })    
     } else if (c !== -1 && !checkCypherConfig(command[c + 1])) {
     } else if (command.length % 2 !== 0) {
         throw new HumanFriendlyErr('you have absent arguments in your command');
