@@ -3,7 +3,14 @@ import { cipherText } from '../cyphers/cipher-text.js';
 import { getArrayFromArgs } from '../cyphers/get-array-from-args.js';
 import { findCypherInArgs } from '../cyphers/get-cypher.js';
 
-const configCypher = getArrayFromArgs(findCypherInArgs(process.argv));
+let configCypher;
+
+try {
+  getArrayFromArgs(findCypherInArgs(process.argv))
+    configCypher = getArrayFromArgs(findCypherInArgs(process.argv))
+}
+catch {
+}
 
 class CounterTransform extends Transform {
     _transform(chunk, encoding, callback) {

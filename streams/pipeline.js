@@ -24,7 +24,7 @@ export const cipherFromFileToConsole = () => {
         writeInConsole,
         (err) => {
             if (err) {
-                new HumanFriendlyErr('Pipeline failed').write();
+                throw new HumanFriendlyErr('Pipeline failed');
             }
         }
     );
@@ -55,5 +55,4 @@ export const cipherInFiles = () => {
         }
     )
 }
-
 

@@ -4,7 +4,7 @@ import { getOutput } from '../utils/get-output.js';
 
 export const writeInConsole = process.stdout;
 
-class WriteStream extends Writable {
+export class WriteStream extends Writable {
   constructor() {
     super();
   }

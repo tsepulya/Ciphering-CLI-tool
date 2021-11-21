@@ -7,22 +7,22 @@ export const getInput = (array) => {
     if (ind !== -1) {
         if (array[ind + 1]) {
             if (!fs.existsSync(array[ind + 1])) {
-                new HumanFriendlyErr('input file doesn`t exist').write();
+                throw new HumanFriendlyErr('input file doesn`t exist');
             } else {
                 return array[ind + 1];
             } 
         } else {
-            new HumanFriendlyErr('if you use "-i" - write the name of file').write();
+            throw new HumanFriendlyErr('if you use "-i" - write the name of file');
         }
     } else if (indInput !== -1) {
         if (array[indInput + 1]) {
             if (!fs.existsSync(array[indInput + 1])) {
-                new HumanFriendlyErr('input file doesn`t exist').write();
+                throw new HumanFriendlyErr('input file doesn`t exist');
             } else {
                 return array[indInput + 1];
             } 
         } else {
-            new HumanFriendlyErr('if you use "--input" - write the name of file').write();
+            throw new HumanFriendlyErr('if you use "--input" - write the name of file');
         }
     } 
 }

@@ -13,7 +13,7 @@ export const cipherInRot = (phrase, type) => {
             } else {
                 arrayNew.push(phrase[i]);
             }
-        } else if (type === 0) {
+        } if (type === 0) {
             let posNew = pos - 8;
             if ((pos >= 65 && pos <= 90) || (pos >= 97 && pos <= 122)) {
                 if ((posNew >= 57 && posNew < 65) || (posNew >= 89 && posNew < 97)) {

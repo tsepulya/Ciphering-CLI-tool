@@ -4,14 +4,15 @@ import { getInput } from '../utils/get-input.js';
 
 export const readfromConsole = process.stdin;
 
-class ReadStream extends Readable {
+export class ReadStream extends Readable {
     constructor() {
       super();
+      this.input = getInput(process.argv);
     }
     _read() {
         try {
-            const input = getInput(process.argv);
-            fs.readFile(input.trim(), "utf8", (error,chunk) => {
+            // const input = getInput(process.argv);
+            fs.readFile(this.input.trim(), "utf8", (error,chunk) => {
                 if (error) {
                     throw error;
                 } else {

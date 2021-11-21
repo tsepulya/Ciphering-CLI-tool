@@ -2,5 +2,34 @@
     "name": "ciphering-cli-tool",
     "version": "1.0.0",
     "author": "tsepulya",
-    "type": "module"
+    "type": "module",
+    "scripts": {
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+        "jest": "^27.3.1"
+    },
+    "jest": {
+        "transform": {},
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+          "**/*.js",
+          "!**/node_modules/**",
+          "!**/coverage/**",
+          "**/cyphers/**",
+          "**/streams/**",
+          "**/utils/**"
+        ]
+    },
+    "babel": {
+        "env": {
+          "test": {
+            "plugins": [
+              "@babel/plugin-transform-modules-commonjs"
+            ]
+          }
+        }
+      }
 }
