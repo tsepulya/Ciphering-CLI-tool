@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { exec } from 'child_process';
 import { getInput } from "../../utils/get-input.js";
 
 describe('getInput', () => {
@@ -28,10 +27,6 @@ describe('getInput', () => {
     test('getInput with "-i" should throw err if file doesnt exist', () => {
         if (!fs.existsSync('./input1.txt')) {
             expect(() => getInput(errorArguments)).toThrow('input file doesn`t exist')
-            exec(`node my_ciphering_cli -c "A" -i "./input1.txt -o "./output.txt"`, () => {
-                expect(stderr).toEqual('input file doesn`t exist');
-                done();
-            });
         }
     })
 
@@ -39,10 +34,6 @@ describe('getInput', () => {
         errorArguments.splice(4, 1, '--input')
         if (!fs.existsSync('./input1.txt')) {
             expect(() => getInput(errorArguments)).toThrow('input file doesn`t exist')
-            exec(`node my_ciphering_cli -c "A" --input "./input1.txt -o "./output.txt"`, () => {
-                expect(stderr).toEqual('input file doesn`t exist');
-                done();
-            });
         }
     })
 

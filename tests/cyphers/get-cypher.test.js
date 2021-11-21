@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import { getCypher, findCypherInArgs } from "../../cyphers/get-cypher.js";
 
 test('getCypher should return phrase with cipher', () => {
@@ -8,10 +7,6 @@ test('getCypher should return phrase with cipher', () => {
     expect(getCypher('R0', 'This is secret. Message about "_" symbol!')).toBe('Lzak ak kwujwl. Ewkksyw stgml "_" kqetgd!')
     expect(getCypher('A', 'This is secret. Message about "_" symbol!')).toBe('Gsrh rh hvxivg. Nvhhztv zylfg "_" hbnylo!')
     expect(() => getCypher('A1', 'This is secret. Message about "_" symbol!')).toThrow('Mistake in cypher')
-    exec(`node my_ciphering_cli -c "A1" -i "./input.txt -o "./output.txt"`, () => {
-        expect(stderr).toEqual('Mistake in cypher');
-        done();
-    });
 })
 
 describe('findCypherInArgs', () => {
@@ -31,28 +26,16 @@ describe('findCypherInArgs', () => {
     test('findCypherInArgs should throw error with empty config', () => {
         processArguments.splice(3, 5);
         expect(() => findCypherInArgs(processArguments)).toThrow(`config for ciphers Config should be {XY(-)}n`)
-        exec(`node my_ciphering_cli -c`, () => {
-            expect(stderr).toEqual('config for ciphers Config should be {XY(-)}n');
-            done();
-        });
     })
 
     test('findCypherInArgs should throw error with empty config', () => {
         processArguments.splice(2, 6, '--config');
         expect(() => findCypherInArgs(processArguments)).toThrow(`config for ciphers Config should be {XY(-)}n`)
-        exec(`node my_ciphering_cli --config`, () => {
-            expect(stderr).toEqual('config for ciphers Config should be {XY(-)}n');
-            done();
-        });
     })
 
     test('findCypherInArgs should throw error with empty config arg', () => {
         processArguments.splice(2, 1);
         expect(() => findCypherInArgs(processArguments)).toThrow(`There is no config for ciphers Config`)
-        exec(`node my_ciphering_cli "A" -i "./input.txt -o "./output.txt"`, () => {
-            expect(stderr).toEqual('There is no config for ciphers Config');
-            done();
-        });
     })
 })
 

@@ -1,6 +1,4 @@
 import {jest} from '@jest/globals';
-import { exec } from 'child_process';
-
 import { checkCommand } from "../../utils/check-command.js";
 import { cipherInConsole, cipherFromFileToConsole, cipherFromConsoleToFile, cipherInFiles } from '../../streams/pipeline.js';
 
@@ -38,36 +36,20 @@ describe('checkCommand', () => {
     test('check extra args', () => {
         processArguments.push('-something')
         expect(() => checkCommand(processArguments)).toThrow('you have unnecessary text in command');
-        exec(`node my_ciphering_cli -c "C1-C1-R0-A" -i "./input.txt -o "./output.txt" -something`, () => {
-            expect(stderr).toEqual('you have unnecessary text in command');
-            done();
-        });
     })
 
     test('check doubled args', () => {
         processArguments.splice(6, 1, '-i');
         expect(() => checkCommand(processArguments)).toThrow('You provided -i argument more than once');
-        exec(`node my_ciphering_cli -c "C1-C1-R0-A" -i "./input.txt" -i "./output.txt"`, () => {
-            expect(stderr).toEqual('You provided -i argument more than once');
-            done();
-        });
     })
 
     test('check if some configs are absent', () => {
         processArguments.splice(5, 3);
         expect(() => checkCommand(processArguments)).toThrow('you have absent arguments in your command');
-        exec(`node my_ciphering_cli -c "C1-C1-R0-A" -i`, () => {
-            expect(stderr).toEqual('you have absent arguments in your command');
-            done();
-        });
     })
 
     test('check if some configs are absent', () => {
         expect(() => checkCommand(['node', 'my_ciphering_cli', '-c', 'C1-C1-R0-A', './input.txt', './output.txt'])).toThrow('you have absent arguments in your command (-i or -o)');
-        exec(`node my_ciphering_cli -c "C1-C1-R0-A" './input.txt' './output.txt'`, () => {
-            expect(stderr).toEqual('you have absent arguments in your command (-i or -o)');
-            done();
-        });
     })
 
     test('check if cipherInFiles works', () => {
