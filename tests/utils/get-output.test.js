@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
 import { getOutput } from "../../utils/get-output.js";
 
 describe('getOutput', () => {
@@ -31,6 +32,10 @@ describe('getOutput', () => {
         const dir = path.dirname('./fff/output.txt');
         if (!fs.existsSync(dir)) {
             expect(() => getOutput(errorArguments)).toThrow('output directory doesn`t exist')
+            exec(`node my_ciphering_cli -c "A" -i "./input.txt -o "./fff/output.txt"`, () => {
+                expect(stderr).toEqual('output directory doesn`t exist');
+                done();
+            });
         }
     })
 
@@ -39,6 +44,10 @@ describe('getOutput', () => {
         const dir = path.dirname('./fff/output.txt');
         if (!fs.existsSync(dir)) {
             expect(() => getOutput(errorArguments)).toThrow('output directory doesn`t exist')
+            exec(`node my_ciphering_cli -c "A" -i "./input.txt --output "./fff/output.txt"`, () => {
+                expect(stderr).toEqual('output directory doesn`t exist');
+                done();
+            });
         }
     })
 
@@ -52,7 +61,7 @@ describe('getOutput', () => {
         expect(() => getOutput(processArguments)).toThrow('if you use "--output" - write the name of file')
     })
 
-    test('getOutput should return undefined if no -0 config', () => {
+    test('getOutput should return undefined if no -o config', () => {
         processArguments.splice(4, 4);
         expect(getOutput(processArguments)).toBeUndefined();
     })
